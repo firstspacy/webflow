@@ -4,15 +4,13 @@
 // Variables for Google maps
 var map, mapElem, exampleLoc;
 
-function initialize() {
+window.addEventListener('load', function () {
 
  // Display a map on the page
   mapElem = document.getElementById('map_canvas');
  
   var dynPlaces = document.querySelectorAll('.w-dyn-item.place'); 
-	var textcontrol = document.getElementById("buttonText");
-	
-    textcontrol.textContent = dynPlaces;
+
     
   var locations = [];
  
@@ -39,7 +37,7 @@ function initialize() {
   
  
  
-  textcontrol.textContent = locations[1][2];
+ 
  
  var lat = 42.642256;
  var lng = 23.336409;
@@ -82,7 +80,41 @@ function initialize() {
      
    
   
-}
+ }, false);
 
 
+</script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mixitup/3.3.0/mixitup.min.js"></script>
+
+
+<script>
+
+//filtering
+  var conv = function (str) {
+      if (!str) {
+          str = 'empty';
+      }  return str.replace(/[!\"#$%&'\(\)\*\+,\.\/:;<=>\?\@\[\\\]\^`\{\|\}~]/g, '')
+                .replace(/ /g, "-")
+                .toLowerCase()
+                .trim();
+    };
+    
+    var catArray = document.querySelectorAll('.w-dyn-item .filter-category');
+    catArray.forEach( function(elem) {
+      var text = elem.innerText || elem.innerContent;
+      var className = conv(text);
+      elem.parentElement.classList.add(className);
+    });
+   
+    
+    var containerEl = document.querySelector('.ad-collection-list');
+    
+    var textcontrol = document.getElementById("buttonText");
+    textcontrol.textContent = containerEl.length;
+    
+    mixitup(containerEl);
+  
+  
 </script>
