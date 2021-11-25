@@ -1,5 +1,4 @@
 
-<script src="https://maps.googleapis.com/maps/api/js?sensor=false&callback=initialize&key=AIzaSyCIgZq0b7mIINmJtrmny4tWXb_91NqspeQ" async defer></script>
 <script>
 // Variables for Google maps
 var map, mapElem, exampleLoc;
