@@ -1,5 +1,7 @@
 
+<script src="https://maps.googleapis.com/maps/api/js?sensor=false&callback=initialize&key=AIzaSyCIgZq0b7mIINmJtrmny4tWXb_91NqspeQ" async defer></script>
 <script>
+/*
 // Variables for Google maps
 var map, mapElem, exampleLoc;
 
@@ -28,19 +30,16 @@ window.addEventListener('load', function () {
 		var pLat = Number(elem.querySelector('.lat').innerText);
 	  var pLong = Number(elem.querySelector('.long').innerText);
     var infoText = elem.querySelector('.info_content').innerHTML;
+    var category = elem.querySelector('.filter-category').innerText;
 
-     place.push(title, infoText, pLat, pLong); // Adding required info about each place to the array of places
+     place.push(title, infoText, pLat, pLong, category); // Adding required info about each place to the array of places
 
      locations.push(place);   // Adding each place to the array of Locations
   });
-  
- 
- 
  
  
  var lat = 42.642256;
  var lng = 23.336409;
- 
  exampleLoc = {lat,lng};
   
   map = new google.maps.Map(mapElem, {
@@ -72,17 +71,47 @@ window.addEventListener('load', function () {
       gmarkers[locations[i][0]] =
         createMarker(new google.maps.LatLng(locations[i][2], locations[i][3]), // passing lat and long
                                 locations[i][1]); // passing Info-window information
+      gmarkers[locations[i][1]] = locations [i][4];
     }
 
- 		var marButtons = document.querySelectorAll('a.filter-button');
-    var textcontrol = document.getElementById("buttonText");
-    textcontrol.textContent = marButtons.length;
+ 		var resetButton = document.querySelector('a.filter-button.reset');
+    var filterMapButtons = document.querySelectorAll('.w-dyn-item.category');
+   
+    filterMapButtons.forEach( function(elem) {
+    	   elem.addEventListener('click',hideMarkers);
+     });
+     
+    resetButton.addEventListener('click', resetMarkers);
+    
+//    var textcontrol = document.getElementById("buttonText");
+//    textcontrol.textContent = resetButton;
+    
+    
+   function hideMarkers (evt) {
+   	var categoryText = evt.currentTarget.querySelector('.filter-button').innerText;
+    
+    for (var i = 0; i < locations.length; i++) {
+       if (gmarkers[locations[i][1]] != categoryText)
+        gmarkers[locations[i][0]].setMap(null);
+       else
+      	gmarkers[locations[i][0]].setMap(map);
+    
+   
+     
+    }
+    
+   }
+   
+   function resetMarkers () {
+	 		for (var i = 0; i < locations.length; i++)
+      	gmarkers [locations[i][0]].setMap (map)
+		}
      
    
   
  }, false);
 
-
+*/
 </script>
 
 
@@ -96,7 +125,7 @@ window.addEventListener('load', function () {
       if (!str) {
           str = 'empty';
       }  return str.replace(/[!\"#$%&'\(\)\*\+,\.\/:;<=>\?\@\[\\\]\^`\{\|\}~]/g, '')
-                .replace(/ /g, "-")
+                .replace(/ /g, "")
                 .toLowerCase()
                 .trim();
     };
@@ -111,7 +140,8 @@ window.addEventListener('load', function () {
     
     var containerEl = document.querySelector('.ad-collection-list');
     
-
+		 var textcontrol = document.getElementById("buttonText");
+    textcontrol.textContent = catArray[0];
     
     mixitup(containerEl);
   
