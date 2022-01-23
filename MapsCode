@@ -1,7 +1,7 @@
 
 <script src="https://maps.googleapis.com/maps/api/js?sensor=false&callback=initialize&key=AIzaSyCIgZq0b7mIINmJtrmny4tWXb_91NqspeQ" async defer></script>
 <script>
-/*
+
 // Variables for Google maps
 var map, mapElem, exampleLoc;
 
@@ -85,11 +85,14 @@ window.addEventListener('load', function () {
     
 //    var textcontrol = document.getElementById("buttonText");
 //    textcontrol.textContent = resetButton;
-    
+     var textcontrol = document.getElementById("buttonText");
+    	var textPrep = filterMapButtons[0].querySelector('.filter-button').getAttribute("name-filter");
+    textcontrol.textContent = textPrep;
     
    function hideMarkers (evt) {
-   	var categoryText = evt.currentTarget.querySelector('.filter-button').innerText;
-    
+   	var categoryText = evt.currentTarget.querySelector('.filter-button').getAttribute('name-filter');
+  //  var categoryText = prepCategoryText.substr(1, prepCategoryText.length);
+      
     for (var i = 0; i < locations.length; i++) {
        if (gmarkers[locations[i][1]] != categoryText)
         gmarkers[locations[i][0]].setMap(null);
@@ -111,7 +114,7 @@ window.addEventListener('load', function () {
   
  }, false);
 
-*/
+
 </script>
 
 
@@ -125,7 +128,7 @@ window.addEventListener('load', function () {
       if (!str) {
           str = 'empty';
       }  return str.replace(/[!\"#$%&'\(\)\*\+,\.\/:;<=>\?\@\[\\\]\^`\{\|\}~]/g, '')
-                .replace(/ /g, "")
+                .replace(/ /g, "-")
                 .toLowerCase()
                 .trim();
     };
@@ -135,13 +138,13 @@ window.addEventListener('load', function () {
       var text = elem.innerText || elem.innerContent;
       var className = conv(text);
       elem.parentElement.classList.add(className);
+    
     });
    
     
     var containerEl = document.querySelector('.ad-collection-list');
     
-		 var textcontrol = document.getElementById("buttonText");
-    textcontrol.textContent = catArray[0];
+		 
     
     mixitup(containerEl);
   
