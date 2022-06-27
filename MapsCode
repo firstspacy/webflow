@@ -83,8 +83,7 @@ window.addEventListener('load', function () {
      
     resetButton.addEventListener('click', resetMarkers);
     
-//    var textcontrol = document.getElementById("buttonText");
-//    textcontrol.textContent = resetButton;
+
      var textcontrol = document.getElementById("buttonText");
     	var textPrep = filterMapButtons[0].querySelector('.filter-button').getAttribute("name-filter");
     textcontrol.textContent = textPrep;
@@ -97,10 +96,7 @@ window.addEventListener('load', function () {
        if (gmarkers[locations[i][1]] != categoryText)
         gmarkers[locations[i][0]].setMap(null);
        else
-      	gmarkers[locations[i][0]].setMap(map);
-    
-   
-     
+      	gmarkers[locations[i][0]].setMap(map);   
     }
     
    }
@@ -110,7 +106,22 @@ window.addEventListener('load', function () {
       	gmarkers [locations[i][0]].setMap (map)
 		}
      
-   
+	   
+   var textcontrol = document.getElementById("buttonText");
+   textcontrol.textContent = "baba";
+     
+ //Colour Filter buttons
+   var colourButtons = document.querySelectorAll('a.filter-button');
+
+	colourButtons.forEach( function(elem) {
+    	   elem.addEventListener('click',function onClick() {
+        	colourButtons.forEach ( function (elem2){
+          	elem2.style.backgroundColor = 'Blue';
+          	});
+          	elem.style.backgroundColor = 'Red';
+          
+        });
+     });
   
  }, false);
 
@@ -150,3 +161,5 @@ window.addEventListener('load', function () {
   
   
 </script>
+
+
